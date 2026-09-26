@@ -1,0 +1,262 @@
+/* ============================================================
+   AI 助教答疑平台 · 公共样式
+   主题：智能 · 亲和 · 现代
+   ============================================================ */
+:root {
+    --primary: #6366f1;        /* 主色：靛蓝 */
+    --primary-2: #8b5cf6;      /* 辅助色：紫 */
+    --accent: #ec4899;         /* 点缀色：粉 */
+    --ink: #1e293b;            /* 正文 */
+    --muted: #64748b;          /* 次要文字 */
+    --line: #e2e8f0;           /* 边框 */
+    --bg-soft: #f8fafc;        /* 浅底 */
+    --ok: #10b981;             /* 校验通过 */
+    --warn: #f59e0b;           /* 警示 */
+    --danger: #ef4444;         /* 校验失败 */
+    --radius: 14px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+    font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", Arial, sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    /* 多层径向渐变 + 线性渐变，营造 AI 科技氛围 */
+    background:
+        radial-gradient(1100px 520px at 8% -8%, rgba(99, 102, 241, .28), transparent 60%),
+        radial-gradient(900px 520px at 100% 0%, rgba(236, 72, 153, .20), transparent 55%),
+        radial-gradient(800px 500px at 50% 110%, rgba(139, 92, 246, .16), transparent 60%),
+        linear-gradient(160deg, #eef2ff 0%, #fdf2f8 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 42px 16px;
+}
+
+/* ---------------- 顶栏品牌 ---------------- */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 26px;
+}
+.brand .logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, .35);
+}
+.brand h1 {
+    font-size: 22px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.brand p { color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+
+/* ---------------- 卡片容器 ---------------- */
+.card {
+    width: 100%;
+    max-width: 560px;
+    background: rgba(255, 255, 255, .92);
+    backdrop-filter: blur(6px);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 50px rgba(99, 102, 241, .16);
+    padding: 34px 38px;
+    border: 1px solid rgba(255, 255, 255, .7);
+}
+.card.wide { max-width: 680px; }
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+.card .sub {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+
+/* ---------------- 分组 fieldset ---------------- */
+fieldset {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px 18px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+legend {
+    font-weight: 600;
+    color: var(--primary);
+    padding: 0 10px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+/* ---------------- 表单行 ---------------- */
+.row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.row:last-child { margin-bottom: 0; }
+.row.half {
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-start;
+}
+.row.half > .field { flex: 1; }
+
+.field { display: flex; flex-direction: column; }
+
+label {
+    font-size: 13px;
+    color: #334155;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+label .req { color: var(--danger); }
+.hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+/* ---------------- 输入控件 ---------------- */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="url"],
+input[type="date"],
+input[type="number"],
+input[type="search"],
+input[type="datetime-local"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 13px;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--bg-soft);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+textarea { resize: vertical; min-height: 72px; }
+
+/* 聚焦 */
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, .16);
+}
+
+/* HTML5 表单校验伪类：:valid / :invalid 实时反馈 */
+input:not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]):invalid:not(:placeholder-shown) {
+    border-color: var(--danger);
+    background: #fff5f5;
+}
+input:not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]):valid:not(:placeholder-shown) {
+    border-color: var(--ok);
+}
+
+/* 单选 / 复选 / 文件 */
+.check-group, .radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 4px 0;
+}
+.check-group label, .radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+    margin: 0;
+    cursor: pointer;
+    color: #334155;
+}
+input[type="file"] { font-size: 13px; }
+input[type="file"]::file-selector-button {
+    border: none;
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* 滑块 */
+input[type="range"] { accent-color: var(--primary); width: 100%; }
+
+/* 颜色 */
+input[type="color"] {
+    width: 46px; height: 34px; padding: 2px; border: 1px solid var(--line);
+    border-radius: 8px; background: #fff; cursor: pointer;
+}
+
+/* 密码强度进度条 */
+meter {
+    width: 100%;
+    height: 8px;
+    margin-top: 6px;
+}
+meter::-webkit-meter-bar { background: var(--line); border-radius: 6px; }
+meter::-webkit-meter-optimum-value { background: var(--ok); border-radius: 6px; }
+meter::-webkit-meter-suboptimum-value { background: var(--warn); border-radius: 6px; }
+meter::-webkit-meter-even-less-good-value { background: var(--danger); border-radius: 6px; }
+
+/* ---------------- 按钮 ---------------- */
+.btn-row { display: flex; gap: 14px; margin-top: 8px; }
+.btn {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: opacity .2s, transform .15s, box-shadow .2s;
+}
+.btn:hover { opacity: .9; transform: translateY(-1px); }
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(99, 102, 241, .3);
+}
+.btn-plain { background: var(--bg-soft); color: var(--muted); border: 1px solid var(--line); }
+
+/* ---------------- 页脚链接 ---------------- */
+.foot {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+}
+.foot a { color: var(--primary); text-decoration: none; font-weight: 600; }
+.foot a:hover { text-decoration: underline; }
+
+/* ---------------- 响应式 ---------------- */
+@media (max-width: 560px) {
+    .card { padding: 24px 20px; }
+    .row.half { flex-direction: column; gap: 0; }
+    .brand h1 { font-size: 19px; }
+}

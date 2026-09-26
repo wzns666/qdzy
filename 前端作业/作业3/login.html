@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - AI 助教答疑平台</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 品牌顶栏 -->
+    <div class="brand">
+        <div class="logo">AI</div>
+        <div>
+            <h1>AI 助教答疑平台</h1>
+            <p>欢迎回来，继续你的学习之旅</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>账号登录</h2>
+        <p class="sub">登录后即可与你的 AI 助教对话</p>
+
+        <form id="loginForm" action="#" method="post">
+
+            <!-- 账号：autofocus 自动聚焦 + autocomplete + <datalist> 历史账号联想 -->
+            <div class="row">
+                <label for="account">账号 / 邮箱 <span class="req">*</span></label>
+                <input type="email" id="account" name="account"
+                       list="accountList"
+                       placeholder="请输入注册邮箱"
+                       autocomplete="email" autofocus required>
+                <datalist id="accountList">
+                    <option value="student@example.com"></option>
+                    <option value="teacher@example.com"></option>
+                    <option value="ta@example.com"></option>
+                </datalist>
+            </div>
+
+            <!-- 密码：type="password" + 可见性切换 -->
+            <div class="row">
+                <label for="pwd">密码 <span class="req">*</span></label>
+                <input type="password" id="pwd" name="pwd"
+                       placeholder="请输入密码"
+                       autocomplete="current-password" required minlength="6">
+                <label class="check-group" style="margin-top:6px;">
+                    <input type="checkbox" id="showPwd"> 显示密码
+                </label>
+            </div>
+
+            <!-- 验证码：<canvas> 绘制图形验证码（HTML5 Canvas 能力） -->
+            <div class="row">
+                <label for="captcha">验证码 <span class="req">*</span></label>
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <input type="text" id="captcha" name="captcha"
+                           placeholder="输入右侧字符"
+                           required maxlength="4" style="flex:1;">
+                    <canvas id="captchaCanvas" width="100" height="38"
+                            style="border:1px solid var(--line); border-radius:8px; cursor:pointer;"
+                            title="点击刷新"></canvas>
+                </div>
+            </div>
+
+            <!-- 记住我：checkbox -->
+            <div class="row">
+                <label class="check-group">
+                    <input type="checkbox" name="remember" checked> 记住我（7 天内免登录）
+                    <span style="margin-left:auto;"><a href="#" style="color:var(--primary); text-decoration:none;">忘记密码？</a></span>
+                </label>
+            </div>
+
+            <div class="btn-row">
+                <button type="submit" class="btn btn-primary">登 录</button>
+            </div>
+        </form>
+
+        <p class="foot">还没有账号？<a href="register.html">立即注册</a></p>
+    </div>
+
+    <script>
+        // ============ 1. 密码可见性切换 ============
+        const pwd = document.getElementById('pwd');
+        const showPwd = document.getElementById('showPwd');
+        showPwd.addEventListener('change', () => {
+            pwd.type = showPwd.checked ? 'text' : 'password';
+        });
+
+        // ============ 2. Canvas 图形验证码 ============
+        const canvas = document.getElementById('captchaCanvas');
+        const ctx = canvas.getContext('2d');
+        let captchaCode = '';
+
+        function drawCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            captchaCode = '';
+            for (let i = 0; i < 4; i++) {
+                captchaCode += chars[Math.floor(Math.random() * chars.length)];
+            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 背景
+            ctx.fillStyle = '#f1f5f9';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // 干扰线
+            for (let i = 0; i < 5; i++) {
+                ctx.strokeStyle = 'rgba(99,102,241,' + (0.3 + Math.random() * 0.4) + ')';
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.stroke();
+            }
+            // 字符（随机旋转）
+            for (let i = 0; i < captchaCode.length; i++) {
+                ctx.save();
+                ctx.font = 'bold 22px Arial';
+                ctx.fillStyle = ['#6366f1', '#8b5cf6', '#ec4899', '#0ea5e9'][i % 4];
+                ctx.translate(16 + i * 22, 26);
+                ctx.rotate((Math.random() - 0.5) * 0.5);
+                ctx.fillText(captchaCode[i], -8, 8);
+                ctx.restore();
+            }
+        }
+        canvas.addEventListener('click', drawCaptcha);
+        drawCaptcha();
+
+        // ============ 3. 登录提交（校验验证码） ============
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('captcha').value.toUpperCase();
+            if (input !== captchaCode) {
+                alert('验证码错误，请重新输入。');
+                drawCaptcha();
+                document.getElementById('captcha').value = '';
+                return;
+            }
+            alert('登录成功（演示页面，未提交到服务器）！');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - AI 助教答疑平台</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 品牌顶栏 -->
+    <div class="brand">
+        <div class="logo">AI</div>
+        <div>
+            <h1>AI 助教答疑平台</h1>
+            <p>7×24 小时 · 智能答疑 · 个性化学习</p>
+        </div>
+    </div>
+
+    <div class="card wide">
+        <h2>创建你的账号</h2>
+        <p class="sub">个性化注册，打造专属的学习助手</p>
+
+        <!-- ================= 注册表单 =================
+             综合使用 HTML5 表单增强特性，详见代码注释 -->
+        <form id="registerForm" action="#" method="post">
+
+            <!-- 一、账号信息 -->
+            <fieldset>
+                <legend>账号信息</legend>
+
+                <!-- 用户名：required 必填 + autofocus 自动聚焦 + placeholder 占位提示
+                     + pattern 正则校验 + minlength/maxlength 长度限制 -->
+                <div class="row">
+                    <label for="username">用户名 <span class="req">*</span></label>
+                    <input type="text" id="username" name="username"
+                           placeholder="3~20 位字母、数字或下划线"
+                           autocomplete="username" autofocus required
+                           pattern="^[A-Za-z0-9_]{3,20}$"
+                           minlength="3" maxlength="20">
+                    <span class="hint">仅支持字母、数字、下划线，3~20 个字符</span>
+                </div>
+
+                <!-- 邮箱：type="email" 自动校验邮箱格式 -->
+                <div class="row">
+                    <label for="email">邮箱 <span class="req">*</span></label>
+                    <input type="email" id="email" name="email"
+                           placeholder="you@example.com"
+                           autocomplete="email" required>
+                </div>
+
+                <!-- 手机号：type="tel" 唤起手机键盘 + pattern 校验 11 位大陆手机号 -->
+                <div class="row">
+                    <label for="phone">手机号</label>
+                    <input type="tel" id="phone" name="phone"
+                           placeholder="11 位手机号"
+                           autocomplete="tel" pattern="^1[3-9]\d{9}$">
+                    <span class="hint">格式：1 开头共 11 位数字</span>
+                </div>
+
+                <div class="row half">
+                    <!-- 密码：type="password" 密文显示 + minlength 最小长度 + 密码强度进度条 -->
+                    <div class="field">
+                        <label for="pwd">登录密码 <span class="req">*</span></label>
+                        <input type="password" id="pwd" name="pwd"
+                               placeholder="8~20 位，含字母和数字"
+                               autocomplete="new-password" required
+                               pattern="^(?=.*[A-Za-z])(?=.*\d)[\S]{8,20}$"
+                               minlength="8" maxlength="20">
+                        <!-- <meter> 密码强度指示条，由 JS 动态更新 -->
+                        <meter id="pwdMeter" min="0" max="4" low="2" high="3" optimum="4" value="0"></meter>
+                        <span class="hint" id="pwdHint">需包含字母和数字</span>
+                    </div>
+                    <!-- 确认密码：JS 校验两次输入一致 -->
+                    <div class="field">
+                        <label for="pwd2">确认密码 <span class="req">*</span></label>
+                        <input type="password" id="pwd2" name="pwd2"
+                               placeholder="再次输入密码"
+                               autocomplete="new-password" required>
+                        <span class="hint" id="pwd2Hint"></span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- 二、身份信息 -->
+            <fieldset>
+                <legend>身份信息</legend>
+
+                <!-- 身份：radio 单选组 -->
+                <div class="row">
+                    <label>你的身份 <span class="req">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="role" value="student" checked> 学生</label>
+                        <label><input type="radio" name="role" value="teacher"> 老师</label>
+                        <label><input type="radio" name="role" value="ta"> 助教</label>
+                    </div>
+                </div>
+
+                <div class="row half">
+                    <!-- 专业：<datalist> 提供联想候选 -->
+                    <div class="field">
+                        <label for="major">专业</label>
+                        <input type="text" id="major" name="major" list="majorList" placeholder="选择或输入专业">
+                        <datalist id="majorList">
+                            <option value="计算机科学与技术"></option>
+                            <option value="软件工程"></option>
+                            <option value="人工智能"></option>
+                            <option value="电子信息工程"></option>
+                            <option value="数学与应用数学"></option>
+                            <option value="自动化"></option>
+                        </datalist>
+                    </div>
+                    <!-- 出生日期：type="date" 日期选择器 + max 限制范围 -->
+                    <div class="field">
+                        <label for="birth">出生日期</label>
+                        <input type="date" id="birth" name="birth" max="2026-09-25">
+                    </div>
+                </div>
+
+                <!-- 入学年份：type="number" + min/max/step 数值范围 -->
+                <div class="row">
+                    <label for="grade">入学年份</label>
+                    <input type="number" id="grade" name="grade"
+                           min="2000" max="2026" step="1" value="2024">
+                </div>
+            </fieldset>
+
+            <!-- 三、学习偏好 -->
+            <fieldset>
+                <legend>学习偏好（个性化推荐）</legend>
+
+                <!-- 主攻学科：checkbox 多选 -->
+                <div class="row">
+                    <label>主攻学科（可多选）</label>
+                    <div class="check-group">
+                        <label><input type="checkbox" name="subject" value="math"> 数学</label>
+                        <label><input type="checkbox" name="subject" value="physics"> 物理</label>
+                        <label><input type="checkbox" name="subject" value="coding"> 编程</label>
+                        <label><input type="checkbox" name="subject" value="english"> 英语</label>
+                        <label><input type="checkbox" name="subject" value="chemistry"> 化学</label>
+                    </div>
+                </div>
+
+                <!-- 每周学习时长：type="range" 滑块 + <output> 实时显示数值 -->
+                <div class="row">
+                    <label for="hours">每周学习时长：<output id="hoursVal" for="hours">8</output> 小时</label>
+                    <input type="range" id="hours" name="hours" min="0" max="40" step="1" value="8">
+                </div>
+
+                <!-- 主题色：type="color" 取色器 -->
+                <div class="row">
+                    <label for="themeColor">喜欢的界面主题色</label>
+                    <input type="color" id="themeColor" name="themeColor" value="#6366f1">
+                </div>
+
+                <!-- 个人主页：type="url" 自动校验 URL 格式 -->
+                <div class="row">
+                    <label for="homepage">个人主页 / 博客链接</label>
+                    <input type="url" id="homepage" name="homepage" placeholder="https://">
+                </div>
+            </fieldset>
+
+            <!-- 四、其他 -->
+            <fieldset>
+                <legend>其他</legend>
+
+                <!-- 头像：type="file" + accept 限制文件类型 -->
+                <div class="row">
+                    <label for="avatar">上传头像</label>
+                    <input type="file" id="avatar" name="avatar" accept="image/*">
+                </div>
+
+                <!-- 简介：textarea + maxlength 上限 + <output> 字数统计 -->
+                <div class="row">
+                    <label for="bio">个人简介（<output id="bioCount" for="bio">0</output>/100）</label>
+                    <textarea id="bio" name="bio" maxlength="100"
+                              placeholder="简单介绍一下自己，方便 AI 助教为你定制答疑~"></textarea>
+                </div>
+
+                <!-- 同意条款：checkbox + required 必须勾选 -->
+                <div class="row">
+                    <label class="check-group">
+                        <input type="checkbox" id="agree" name="agree" required>
+                        我已阅读并同意《用户协议》和《隐私政策》
+                    </label>
+                </div>
+            </fieldset>
+
+            <div class="btn-row">
+                <!-- 提交 / 重置按钮 -->
+                <button type="submit" class="btn btn-primary">立即注册</button>
+                <button type="reset" class="btn btn-plain">重新填写</button>
+            </div>
+        </form>
+
+        <p class="foot">已有账号？<a href="login.html">去登录</a></p>
+    </div>
+
+    <script>
+        // ================= 交互增强（JS） =================
+        // 1. 密码强度指示
+        const pwd = document.getElementById('pwd');
+        const meter = document.getElementById('pwdMeter');
+        const pwdHint = document.getElementById('pwdHint');
+        pwd.addEventListener('input', () => {
+            const v = pwd.value;
+            let score = 0;
+            if (v.length >= 8) score++;
+            if (/[A-Za-z]/.test(v) && /\d/.test(v)) score++;
+            if (/[^A-Za-z0-9]/.test(v)) score++;
+            if (v.length >= 14) score++;
+            meter.value = score;
+            pwdHint.textContent =
+                score <= 1 ? '弱：需包含字母和数字' :
+                score === 2 ? '中：可增加特殊符号' :
+                score === 3 ? '较强：再加长更安全' : '强：密码很安全';
+        });
+
+        // 2. 确认密码一致性
+        const pwd2 = document.getElementById('pwd2');
+        const pwd2Hint = document.getElementById('pwd2Hint');
+        pwd2.addEventListener('input', () => {
+            if (pwd2.value === '') { pwd2Hint.textContent = ''; return; }
+            pwd2Hint.textContent = pwd2.value === pwd.value ? '✓ 两次输入一致' : '✗ 两次输入不一致';
+            pwd2Hint.style.color = pwd2.value === pwd.value ? 'var(--ok)' : 'var(--danger)';
+        });
+
+        // 3. 学习时长滑块实时显示（<output>）
+        const hours = document.getElementById('hours');
+        const hoursVal = document.getElementById('hoursVal');
+        hours.addEventListener('input', () => hoursVal.value = hours.value);
+
+        // 4. 简介字数统计（<output>）
+        const bio = document.getElementById('bio');
+        const bioCount = document.getElementById('bioCount');
+        bio.addEventListener('input', () => bioCount.value = bio.value.length);
+
+        // 5. 提交时前端校验拦截（演示 HTML5 校验能力）
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            if (pwd.value !== pwd2.value) {
+                e.preventDefault();
+                alert('两次输入的密码不一致，请重新输入。');
+            } else {
+                e.preventDefault();
+                alert('注册成功（演示页面，未提交到服务器）！');
+            }
+        });
+    </script>
+</body>
+</html>
