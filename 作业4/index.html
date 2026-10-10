@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #171923;
+        }
+        .stage{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 44px;
+            padding:56px 32px
+        }
+        .cube{
+            width: 140px;
+            height: 140px;
+            border-radius: 12px;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+        .cube:hover{
+            transform: translateY(-10px);
+        }
+        .c1{
+            background: linear-gradient(180deg, #ff8859, #ff6d5f);
+            box-shadow: 0 25px 45px -12px rgba(255, 109, 95, .45);
+            border-radius: 0
+        }
+        .c2{
+            background: linear-gradient(180deg, #36d3a4, #3acd84);
+            box-shadow: 0 25px 45px -12px rgba(58, 205, 132, .45);
+        }
+        .c3{
+            background: linear-gradient(180deg, #a583a3, #736595);
+            box-shadow: 0 25px 45px -12px rgba(115, 101, 149, .45);
+        }
+        .c4{
+            background: linear-gradient(180deg, #f8c46e, #fbaf7c);
+            box-shadow: 0 25px 45px -12px rgba(251, 175, 124, .45);
+             border-radius: 50%;
+        }
+        .c5{
+            background: #4a7672;
+            box-shadow: 0 25px 45px -12px rgba(74, 118, 114, .45);
+        }
+        .c6{
+            background: linear-gradient(180deg, #ab89af, #88739f);
+            box-shadow: 0 25px 45px -12px rgba(136, 115, 159, .45);
+             border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="cube c1"></div>
+        <div class="cube c2"></div>
+        <div class="cube c3"></div>
+        <div class="cube c4"></div>
+        <div class="cube c5"></div>
+        <div class="cube c6"></div>
+    </div>
+</body>
+</html>
