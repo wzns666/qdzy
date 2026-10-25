@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>数据看板 · 前端作业 05</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="侧边栏">
+      <a class="brand" href="#overview" aria-label="Northstar 数据看板">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2L12 2Z"/>
+        </svg>
+        <span>Northstar</span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a class="active" href="#overview" aria-current="page">概览</a>
+        <a href="#metrics">核心指标</a>
+        <a href="#notes">数据说明</a>
+      </nav>
+      <p class="sidebar-foot">DEMO DATA<br>2026 · Q4</p>
+    </aside>
+
+    <div class="main">
+      <header class="topbar" id="overview">
+        <div>
+          <p class="eyebrow">Northstar · 2026 第四季度</p>
+          <h1>数据看板</h1>
+          <p class="sub">六个核心指标，一屏掌握业务表现。</p>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换到深色模式">
+          深色模式
+        </button>
+      </header>
+
+      <main>
+        <section class="kpi-section" id="metrics" aria-labelledby="metrics-title">
+          <div class="section-head">
+            <h2 id="metrics-title">核心指标</h2>
+            <span>6 项指标 · 较昨日</span>
+          </div>
+          <div class="kpi-grid" id="kpi-grid"></div>
+        </section>
+      </main>
+
+      <footer id="notes">数据为课程演示数据 · HTML + CSS + 原生 JS</footer>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
